@@ -14,6 +14,7 @@ $( "#start-button" ).click(function() {
     cardImage.setAttribute("src", "images/"+card.name+".png");
     cardImage.setAttribute("id", card.name);
     cardImage.setAttribute("height", "100px");
+    cardImage.setAttribute("class", "card");
     cardImage.setAttribute("alt", card.name);
     document.getElementById("player-population").appendChild(cardImage);})
   cards.forEach(function(card){
@@ -21,6 +22,7 @@ $( "#start-button" ).click(function() {
     cardImage.setAttribute("src", "images/"+card.name+".png");
     cardImage.setAttribute("id", card.name);
     cardImage.setAttribute("height", "100px");
+    cardImage.setAttribute("class", "card");
     cardImage.setAttribute("alt", card.name );
     document.getElementById("machine-population").appendChild(cardImage);
   })
@@ -36,12 +38,19 @@ $("#deck-image").click(function() {
   displayPlayerCards();
 });
 
+function playCard(e) {
+  console.log(e.target.alt)
+  player1.playCard(e.target.alt);
+  displayPlayerCards();
+};
+
 function displayMachineCards() {
   $("#machine-hand").empty();
   machine.hand.forEach(function(card){
     cardImage = document.createElement("img");
     cardImage.setAttribute("src", "images/back.png");
     cardImage.setAttribute("height", "100px");
+    cardImage.setAttribute("class", "card");
     cardImage.setAttribute("alt", "Card back");
     document.getElementById("machine-hand").appendChild(cardImage);
   })
@@ -53,7 +62,9 @@ function displayPlayerCards() {
     cardImage = document.createElement("img");
     cardImage.setAttribute("src", "images/"+card[0].name+".png");
     cardImage.setAttribute("height", "100px");
+    cardImage.setAttribute("class", "card playerCard");
     cardImage.setAttribute("alt", card[0].name );
+    cardImage.setAttribute("onclick","playCard(event)" )
     document.getElementById("player-hand").appendChild(cardImage);
   });
 };

@@ -33,4 +33,10 @@ background-size: 100%;
   border-image: url('/images/background.jpg');
   margin: 0 19%;
 }
+.card {
+  border: 3px solid red;
+}
 
+#deck-image img {
+  border: 10px solid black;
+}

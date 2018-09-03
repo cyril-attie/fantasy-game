@@ -1,16 +1,11 @@
-var cards=[
-  {name :"elf",                 //reuse the power of one of the cards you've already played
-  effect : function(copyiedCard) {
-    copyiedCard.effect();
-    } 
-  }, 
+var cards=[ 
   {name :"gnome",              //draw two extra cards
   effect : function() {
     Player.drawCards(2);
     }
   },
   {name :"hobgoblin",              //Swap your people (cards already played) with an opponent of your choice
-  effect : function(copyiedCard) {
+  effect : function() {
     return copyiedCard.effect();
     }
   },
@@ -28,10 +23,9 @@ var cards=[
     }
    },
   {name :"dryad",            //Steal a card already played by an opponent and add it to your people
-  effect : function() {}
-  },
-  {name :"fairy",            //Cancels the power of another's player card
-    effect : function() {}
+  effect : function(targetPlayer) {
+    
+  }
   }
 ]
 

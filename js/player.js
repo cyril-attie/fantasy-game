@@ -3,12 +3,10 @@ var deck= new DeckOfCards().init();
 function Player() { 
   this.hand =[]
   this.population = {
-    elf:0,
     gnome:0,
     hobgoblin:0,
     goblin:0,
     imp:0,
-    fairy:0,
     dryad:0
   }
 }
@@ -20,3 +18,10 @@ Player.prototype.drawCards = function(numberOfCards) {
   }
   return this.hand;
   }
+
+Player.prototype.playCard = function(card) {
+  var playerCards= player1.hand.map(function(elem){return elem[0]["name"]})
+  var played=this.hand.splice(playerCards.indexOf(card),1);
+  this.population[played[0][0].name] +=1;
+  //played[0][0].effect();
+}
