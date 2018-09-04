@@ -39,8 +39,7 @@ $("#deck-image").click(function() {
 });
 
 function playCard(e) {
-  console.log(e.target.alt)
-  player1.playCard(e.target.alt);
+  player1.playCard(e.target.alt); // passed name of the card
   displayPlayerCards();
 };
 
