@@ -1,14 +1,17 @@
-player1 = new Player();
-player1.hand= player1.drawCards(5);
-machine = new Player();
+//creating player objects, name must be player1 or machine
+player = new Player("player");
+player.hand= player.drawCards(5);
+machine = new Player("machine");
 machine.hand = machine.drawCards(5);
+turnPlayer = player
+passivePlayer = machine
 
 $( "#start-button" ).click(function() {
   $(".game-intro").hide();
   alert( "Ready to start Fantasy game?"); 
    
-  displayMachineCards();
-  displayPlayerCards();
+  displayCards(machine);
+  displayCards(player);
   cards.forEach(function(card){
     cardImage= document.createElement("img");
     cardImage.setAttribute("src", "images/"+card.name+".png");
@@ -26,44 +29,62 @@ $( "#start-button" ).click(function() {
     cardImage.setAttribute("alt", card.name );
     document.getElementById("machine-population").appendChild(cardImage);
   })
-
   deckImage=document.createElement("img");
   deckImage.setAttribute("src", "images/back.png");
   document.getElementById("deck-image").appendChild(deckImage);
-  
+  alert("Click on the Fantasy deck to draw a card")
 });
 
 $("#deck-image").click(function() {
-  player1.drawCards(1);
-  displayPlayerCards();
+  turnPlayer.drawCards(1);
+  displayCards(player);
 });
 
-function playCard(e) {
-  player1.playCard(e.target.alt); // passed name of the card
-  displayPlayerCards();
+
+function playerCard(e) {
+  player.playCard(e.target.alt, player); // passed name of the card
+  turnChange();
+  playMachine();
 };
 
-function displayMachineCards() {
-  $("#machine-hand").empty();
-  machine.hand.forEach(function(card){
-    cardImage = document.createElement("img");
-    cardImage.setAttribute("src", "images/back.png");
-    cardImage.setAttribute("height", "100px");
-    cardImage.setAttribute("class", "card");
-    cardImage.setAttribute("alt", "Card back");
-    document.getElementById("machine-hand").appendChild(cardImage);
-  })
-};
+function turnChange(){
+  var tmp = turnPlayer 
+  turnPlayer = passivePlayer
+  passivePlayer = tmp
+}
 
-function displayPlayerCards() {
-  $("#player-hand").empty();
-  player1.hand.forEach(function(card){
+function playMachine() {
+  machine.drawCards(1);
+  displayCards(machine);
+  index = Math.floor(Math.random()*machine.hand.length);
+  console.log("at index" + index);
+  cardName = $("#machine-hand").children()[index].alt;
+  machine.playCard(cardName);
+  $("#machine-hand").children()[index].src="images/"+cardName+".png";
+  // setTimeout($("#machine-hand").removeChild($("#machine-hand").children()[index]);
+  turnChange();
+
+}
+// function machineCard(e) {
+//   machine.playCard(e.target.alt, machine); // passed name of the card
+//   displayCards(machine);
+// };
+function displayCards(turnPlayer){
+  $("#"+turnPlayer.name+"-hand").empty();
+  turnPlayer.hand.forEach(function(card){
     cardImage = document.createElement("img");
-    cardImage.setAttribute("src", "images/"+card[0].name+".png");
     cardImage.setAttribute("height", "100px");
-    cardImage.setAttribute("class", "card playerCard");
-    cardImage.setAttribute("alt", card[0].name );
-    cardImage.setAttribute("onclick","playCard(event)" )
-    document.getElementById("player-hand").appendChild(cardImage);
-  });
-};
+    if (turnPlayer.name == "machine") {
+      cardImage.setAttribute("src", "images/back.png");
+      cardImage.setAttribute("class", "card");
+      cardImage.setAttribute("alt", card[0].name ); 
+      document.getElementById("machine-hand").appendChild(cardImage);
+    } else if (turnPlayer.name == "player") {
+      cardImage.setAttribute("src", "images/"+card[0].name+".png");
+      cardImage.setAttribute("class", "card playerCard");
+      cardImage.setAttribute("alt", card[0].name );
+      cardImage.setAttribute("onclick","playerCard(event)" )
+      document.getElementById("player-hand").appendChild(cardImage);
+      }
+})
+}

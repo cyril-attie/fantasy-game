@@ -1,6 +1,7 @@
 var deck= new DeckOfCards().init();
 //Player constructor 
-function Player() { 
+function Player(name) {
+  this.name = name 
   this.hand =[]
   this.population = {
     gnome:0,
@@ -19,10 +20,12 @@ Player.prototype.drawCards = function(numberOfCards) {
   return this.hand;
   }
 
-Player.prototype.playCard = function(card) {
+Player.prototype.playCard = function(cardName) {
   //get the hand of the player and find index of played card removing it from hand
-  var playerCards= player1.hand.map(function(elem){return elem[0]["name"]})
-  var played=this.hand.splice(playerCards.indexOf(card),1);
+  var playerCards = this.hand.map(function(elem){return elem[0]["name"]})
+  var played=this.hand.splice(playerCards.indexOf(cardName),1);
   this.population[played[0][0].name] +=1;
-  played[0][0].effect();
+  played[0][0].effect(this);
+  displayCards(machine);
+  displayCards(player);
 }
