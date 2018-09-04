@@ -15,8 +15,8 @@ var cards=[
    },
   {name :"dryad",            //Steal a card already played by an opponent and add it to your people
   effect : function() {
-    people = Object.keys(machine.population).filter(key => machine.population[key]);
-    console.log(people);
+    var people = Object.keys(machine.population).filter(key => machine.population[key]);
+    console.log(people[Math.floor(Math.random()*people.length)]);
     
   }
 },

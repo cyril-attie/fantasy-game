@@ -1,12 +1,12 @@
+player1 = new Player();
+player1.hand= player1.drawCards(5);
+machine = new Player();
+machine.hand = machine.drawCards(5);
 
 $( "#start-button" ).click(function() {
   $(".game-intro").hide();
   alert( "Ready to start Fantasy game?"); 
-  player1 = new Player()
-  player1.hand= player1.drawCards(5);
-  machine = new Player()
-  machine.hand = machine.drawCards(5);
-  
+   
   displayMachineCards();
   displayPlayerCards();
   cards.forEach(function(card){
