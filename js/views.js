@@ -9,7 +9,6 @@ passivePlayer = machine
 $( "#start-button" ).click(function() {
   $(".game-intro").hide();
   alert( "Ready to start Fantasy game?"); 
-   
   displayCards(machine);
   displayCards(player);
   cards.forEach(function(card){
@@ -31,18 +30,18 @@ $( "#start-button" ).click(function() {
   })
   deckImage=document.createElement("img");
   deckImage.setAttribute("src", "images/back.png");
-  document.getElementById("deck-image").appendChild(deckImage);
+  deckImage.setAttribute("id", "deck-image");
+  document.getElementById("deck-div").appendChild(deckImage);
   alert("Click on the Fantasy deck to draw a card")
 });
 
-$("#deck-image").click(function() {
-  turnPlayer.drawCards(1);
+$("#deck-div").click(function() {
+  player.drawCards(1);
   displayCards(player);
 });
 
-
 function playerCard(e) {
-  player.playCard(e.target.alt, player); // passed name of the card
+  player.playCard(e.target.alt); // passed name of the card
   turnChange();
   playMachine();
 };
@@ -56,12 +55,12 @@ function turnChange(){
 function playMachine() {
   machine.drawCards(1);
   displayCards(machine);
-  index = Math.floor(Math.random()*machine.hand.length);
-  console.log("at index" + index);
-  cardName = $("#machine-hand").children()[index].alt;
+  cardIndex = Math.floor(Math.random()*machine.hand.length);
+  cardName = $("#machine-hand").children()[cardIndex].alt;
+  $("#machine-hand").children()[cardIndex].src="images/"+cardName+".png";
   machine.playCard(cardName);
-  $("#machine-hand").children()[index].src="images/"+cardName+".png";
-  // setTimeout($("#machine-hand").removeChild($("#machine-hand").children()[index]);
+  alert("Machine played " + cardName)
+  setTimeout($("#machine-hand").removeChild($("#machine-hand").children()[index]),2000);
   turnChange();
 
 }
@@ -78,7 +77,7 @@ function displayCards(turnPlayer){
       cardImage.setAttribute("src", "images/back.png");
       cardImage.setAttribute("class", "card");
       cardImage.setAttribute("alt", card[0].name ); 
-      document.getElementById("machine-hand").appendChild(cardImage);
+      document.getElementById("machine-hand").appendChild(cardImage); 
     } else if (turnPlayer.name == "player") {
       cardImage.setAttribute("src", "images/"+card[0].name+".png");
       cardImage.setAttribute("class", "card playerCard");
