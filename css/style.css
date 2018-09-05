@@ -26,11 +26,18 @@ background-size: 100%;
   50% {font-weight:700;
   border-width: 8px}
 }
- 
+
+#game-area {
+  background: darkgreen;
+}
+#deck-counter{
+  font-size: 3em;
+  color: black;
+}
+
 .logo-img {
   width:62%;
-  background-image: url("");
-  border-image: url('/images/background.jpg');
+  
   margin: 0 19%;
 }
 .card {
@@ -39,4 +46,10 @@ background-size: 100%;
 
 #deck-image img {
   border: 10px solid black;
+}
+
+.machinePickedCard{
+  width: 100px;
+  height: 100px;
+  background: yellow;
 }

@@ -32,6 +32,14 @@ $( "#start-button" ).click(function() {
   deckImage.setAttribute("src", "images/back.png");
   deckImage.setAttribute("id", "deck-image");
   document.getElementById("deck-div").appendChild(deckImage);
+  
+  deckCounter=document.createElement("p");
+  deckCounter.setAttribute("id", "deck-counter");
+  $("#deck-counter").text(deck.length);
+  document.getElementById("deck-div").appendChild(deckCounter);
+ 
+  machineCard=$(".container").append('<div class="machinePickedCard"></div>')
+  machineCard.append("<img src=#>" )
   alert("Click on the Fantasy deck to draw a card")
 });
 
@@ -47,27 +55,47 @@ function playerCard(e) {
 };
 
 function turnChange(){
+  $("#deck-counter").text(deck.length);
+  checkIfFinnish();
   var tmp = turnPlayer 
   turnPlayer = passivePlayer
   passivePlayer = tmp
 }
 
+function checkIfFinnish() {
+ if (deck.length==0) {
+    finnishGame()
+  }
+}
+
+function finnishGame() {
+  
+  playerPopulation=Object.values(player.population).reduce(function(acc, nb){return acc+=nb},0)
+  machinePopulation=Object.values(machine.population).reduce(function(acc, nb){return acc+=nb},0);
+  if (playerPopulation>machinePopulation) {
+    alert("You won, your population has "+playerPopulation+" people and machine population has " + machinePopulation +" people.")
+  } else if (playerPopulation==machinePopulation){
+    alert("It's a draw, your population has "+playerPopulation+" people and machine population has " +machinePopulation +" people.")
+  } else {
+    alert("You lost, your population has "+playerPopulation+" people and machine population has " + machinePopulation +" people.")
+  }
+}
+
 function playMachine() {
   machine.drawCards(1);
   displayCards(machine);
-  cardIndex = Math.floor(Math.random()*machine.hand.length);
-  cardName = $("#machine-hand").children()[cardIndex].alt;
-  $("#machine-hand").children()[cardIndex].src="images/"+cardName+".png";
+  var cardIndex = Math.floor(Math.random()*machine.hand.length);
+  var cardName = $("#machine-hand").children()[cardIndex].alt;
+$("#machine-hand").children()[cardIndex].src="images/"+cardName+".png";
+ console.log($("#machine-hand").children()[cardIndex].src)
+ machineCard = $(".machinePickedCard").empty()
+ machineCard.append("Machine played <img src=images/"+cardName+".png>" )
+ alert("Machine played " + cardName)
   machine.playCard(cardName);
-  alert("Machine played " + cardName)
-  setTimeout($("#machine-hand").removeChild($("#machine-hand").children()[index]),2000);
+  console.log($("#machine-hand"))
   turnChange();
-
 }
-// function machineCard(e) {
-//   machine.playCard(e.target.alt, machine); // passed name of the card
-//   displayCards(machine);
-// };
+
 function displayCards(turnPlayer){
   $("#"+turnPlayer.name+"-hand").empty();
   turnPlayer.hand.forEach(function(card){
