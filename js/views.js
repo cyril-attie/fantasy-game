@@ -46,7 +46,8 @@ $( "#start-button" ).click(function() {
   document.getElementById("deck-div").appendChild(deckCounter);
  
   machineCard=$("#deck-div").append('<div class="machinePickedCard"></div>')
-  alert("Click on the Fantasy deck to draw a card")
+  $("#game-log").append(`GAME LOG: <br>
+  Click on the Fantasy deck to draw a card<br>`)
 });
 
 $("#deck-div").click(function() {
@@ -102,7 +103,6 @@ $("#machine-hand").children()[cardIndex].src="images/"+cardName+".png";
 
  machineCard = $(".machinePickedCard").empty()
  machineCard.append("Machine played <img class='machine-card' src=images/"+cardName+".png>" )
- alert("Machine played " + cardName)
   machine.playCard(cardName);
   
   turnChange();

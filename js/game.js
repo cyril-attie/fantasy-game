@@ -1,7 +1,4 @@
 //creating player objects, name must be player1 or machine
-
-
-
 const player = new Player("player");
 player.hand= player.drawCards(5);
 const machine = new Player("machine");

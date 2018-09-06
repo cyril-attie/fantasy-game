@@ -48,16 +48,32 @@ population {
   justify-content: flex-end;
   width:50%;
   margin-top:20px;
+  flex-wrap: wrap;
+}
+#game-log{
+  display:inline-flex;
+  justify-content: flexend;
+  width: 50%;
+  padding:20px;
+  color:black;
+  font-weight: 500;
 }
 
 #game-area {
   padding: 5% 10%;
   background-image: url("../images/mat.jpg");
 }
+
+#player-hand {
+  display:flex;
+  width:50%;
+}
+
 .counter{
   display:inline;
   font-size: 3em;
   color: black;
+  height:40px;
 }
 .machine-card{
   height:98px
