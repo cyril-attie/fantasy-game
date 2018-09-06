@@ -1,11 +1,3 @@
-//creating player objects, name must be player1 or machine
-player = new Player("player");
-player.hand= player.drawCards(5);
-machine = new Player("machine");
-machine.hand = machine.drawCards(5);
-turnPlayer = player
-passivePlayer = machine
-
 $( "#start-button" ).click(function() {
   $(".game-intro").hide();
   alert( "Ready to start Fantasy game?"); 
@@ -19,6 +11,9 @@ $( "#start-button" ).click(function() {
     cardImage.setAttribute("class", "card");
     cardImage.setAttribute("alt", card.name);
     document.getElementById("player-population").appendChild(cardImage);})
+  var populationTotal=document.createElement('p')
+  populationTotal.id="player-population-total"
+  document.getElementById("player-population").appendChild(populationTotal);
   cards.forEach(function(card){
     cardImage= document.createElement("img");
     cardImage.setAttribute("src", "images/"+card.name+".png");
@@ -28,6 +23,9 @@ $( "#start-button" ).click(function() {
     cardImage.setAttribute("alt", card.name );
     document.getElementById("machine-population").appendChild(cardImage);
   })
+  var populationTotal=document.createElement('p')
+  populationTotal.id="machine-population-total"
+  document.getElementById("machine-population").appendChild(populationTotal);
   deckImage=document.createElement("img");
   deckImage.setAttribute("src", "images/back.png");
   deckImage.setAttribute("id", "deck-image");
@@ -38,21 +36,18 @@ $( "#start-button" ).click(function() {
   $("#deck-counter").text(deck.length);
   document.getElementById("deck-div").appendChild(deckCounter);
  
-  machineCard=$(".container").append('<div class="machinePickedCard"></div>')
+  machineCard=$("#deck-div").append('<div class="machinePickedCard"></div>')
   machineCard.append("<img src=#>" )
   alert("Click on the Fantasy deck to draw a card")
 });
 
 $("#deck-div").click(function() {
+  if (playerCanDraw= true){
   player.drawCards(1);
+  playerCanDraw=false}
   displayCards(player);
 });
 
-function playerCard(e) {
-  player.playCard(e.target.alt); // passed name of the card
-  turnChange();
-  playMachine();
-};
 
 function turnChange(){
   $("#deck-counter").text(deck.length);
@@ -60,6 +55,9 @@ function turnChange(){
   var tmp = turnPlayer 
   turnPlayer = passivePlayer
   passivePlayer = tmp
+  
+  document.getElementById("machine-population-total").innerHTML=Object.values(machine.population).reduce(function(acc, nb){return acc+=nb},0);
+  document.getElementById("player-population-total").innerHTML=Object.values(player.population).reduce(function(acc, nb){return acc+=nb},0);
 }
 
 function checkIfFinnish() {
@@ -89,7 +87,7 @@ function playMachine() {
 $("#machine-hand").children()[cardIndex].src="images/"+cardName+".png";
  console.log($("#machine-hand").children()[cardIndex].src)
  machineCard = $(".machinePickedCard").empty()
- machineCard.append("Machine played <img src=images/"+cardName+".png>" )
+ machineCard.append("Machine played <img class='machine-card' src=images/"+cardName+".png>" )
  alert("Machine played " + cardName)
   machine.playCard(cardName);
   console.log($("#machine-hand"))
@@ -98,6 +96,7 @@ $("#machine-hand").children()[cardIndex].src="images/"+cardName+".png";
 
 function displayCards(turnPlayer){
   $("#"+turnPlayer.name+"-hand").empty();
+  console.log(turnPlayer.hand)
   turnPlayer.hand.forEach(function(card){
     cardImage = document.createElement("img");
     cardImage.setAttribute("height", "100px");

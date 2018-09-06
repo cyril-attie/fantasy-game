@@ -22,7 +22,6 @@ Player.prototype.drawCards = function(numberOfCards) {
 Player.prototype.playCard = function(cardName) {
   //get the hand of the player and find index of played card removing it from hand
   var playerCards = this.hand.map(function(elem){return elem[0]["name"]})
-  console.log(playerCards)
   var played=this.hand.splice(playerCards.indexOf(cardName),1);
   this.population[played[0][0].name] +=1;
   played[0][0].effect(this);

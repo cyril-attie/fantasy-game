@@ -27,12 +27,32 @@ background-size: 100%;
   border-width: 8px}
 }
 
+#machine-hand {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.population {
+  display: flex;
+  justify-content: center;
+  color:black;
+  font-size:2em;
+}
+
+#deck-div {
+  display: flex;
+  justify-content: flex-end;
+}
+
 #game-area {
   background: darkgreen;
 }
 #deck-counter{
   font-size: 3em;
   color: black;
+}
+.machine-card{
+  height:100px
 }
 
 .logo-img {
@@ -49,7 +69,6 @@ background-size: 100%;
 }
 
 .machinePickedCard{
-  width: 100px;
   height: 100px;
   background: yellow;
 }
