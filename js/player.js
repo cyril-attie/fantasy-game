@@ -13,8 +13,11 @@ function Player(name) {
 
 Player.prototype.drawCards = function(numberOfCards) {
   for (var i=0;i<numberOfCards;i++) {
-    randomCard = deck.splice(Math.floor(Math.random()*deck.length),1);
-    this.hand.push(randomCard);
+    if (deck.length!=0) {
+      randomCard = deck.splice(Math.floor(Math.random()*deck.length),1);
+      this.hand.push(randomCard);
+      $("#deck-counter").text(deck.length);
+    }
   }
   return this.hand;
   }

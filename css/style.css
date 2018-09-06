@@ -1,6 +1,6 @@
 .game-intro {
 height : 100%;
-background: url('/images/background.png');
+background: url('images/background.png');
 background-size: 100%;
 }
 
@@ -32,8 +32,11 @@ background-size: 100%;
   justify-content: flex-end;
 }
 
-.population {
+.populations {
   display: flex;
+}
+  
+population {
   justify-content: center;
   color:black;
   font-size:2em;
@@ -45,9 +48,10 @@ background-size: 100%;
 }
 
 #game-area {
+  padding: 20px 80px;
   background: darkgreen;
 }
-#deck-counter{
+.counter{
   font-size: 3em;
   color: black;
 }
@@ -64,8 +68,11 @@ background-size: 100%;
   border: 3px solid red;
 }
 
-#deck-image img {
+#deck-image {
   border: 10px solid black;
+  border-radius:3px;
+  height:150px;
+  width:100px;
 }
 
 .machinePickedCard{
