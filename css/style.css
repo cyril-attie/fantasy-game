@@ -34,6 +34,7 @@ background-size: 100%;
 
 .populations {
   display: flex;
+  margin:20px;
 }
   
 population {
@@ -43,20 +44,23 @@ population {
 }
 
 #deck-div {
-  display: flex;
+  display: inline-flex;
   justify-content: flex-end;
+  width:50%;
+  margin-top:20px;
 }
 
 #game-area {
-  padding: 20px 80px;
-  background: darkgreen;
+  padding: 5% 10%;
+  background-image: url("../images/mat.jpg");
 }
 .counter{
+  display:inline;
   font-size: 3em;
   color: black;
 }
 .machine-card{
-  height:100px
+  height:98px
 }
 
 .logo-img {
@@ -76,6 +80,8 @@ population {
 }
 
 .machinePickedCard{
-  height: 100px;
-  background: yellow;
+  height: 100px;  
+  color:black;
+  background: darkolivegreen;
+  border: 2px solid black;
 }

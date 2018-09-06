@@ -1,6 +1,12 @@
 $( "#start-button" ).click(function() {
+  //hide the intro logo and start button
   $(".game-intro").hide();
-  alert( "Ready to start Fantasy game?"); 
+  alert( "Ready to start Fantasy game?");
+  //tune harry potter music 
+  var audio = new Audio('audio/harry_potter_theme.mp3');
+  audio.setAttribute("loop",'');
+  audio.play();
+  //display cards
   displayCards(machine);
   displayCards(player);
   cards.forEach(function(card){
@@ -35,7 +41,7 @@ $( "#start-button" ).click(function() {
   
   deckCounter=document.createElement("p");
   deckCounter.setAttribute("id", "deck-counter");
-  deckCounter.setAttribute("clas", "counter");
+  deckCounter.setAttribute("class", "counter");
   $("#deck-counter").text(deck.length);
   document.getElementById("deck-div").appendChild(deckCounter);
  
