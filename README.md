@@ -20,7 +20,7 @@ Añadir tres cartas más.
 Crearía un objeto Game() en el cual están todos los efectos de las cartas. En el objeto carta tan sólo habría una llamada al efecto correspondiente. 
 
 ### Un cachito de código para crear un mazo:
-´´´javascript
+```javascript
 function DeckOfCards() {
   this.deck = [];
   this.init = function() {
@@ -31,5 +31,5 @@ function DeckOfCards() {
     }; 
     return this.deck;
   }
-} 
+}
 ```
